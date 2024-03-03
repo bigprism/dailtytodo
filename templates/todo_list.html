@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Todo List</h1>
+
+<ul class="list-group">
+{% for todo in todo_list %}
+    <li class="list-group-item {% if todo.completed %}bg-success{% endif %}">
+        <input type="checkbox" {% if todo.completed %}checked{% endif %} onchange="toggleComplete({{ todo.id }})">
+        {{ todo.title }}
+        <a href="{% url 'todo_update' todo.id %}" class="btn btn-primary btn-sm">Edit</a>
+        <a href="{% url 'todo_delete' todo.id %}" class="btn btn-danger btn-sm">Delete</a>
+    </li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'todo_create' %}" class="btn btn-success">Create New Todo</a>
+
+{% endblock %}
